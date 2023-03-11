@@ -7,7 +7,7 @@
     <li>Car Manufacturer : @car.Manufacturer</li>
     <li>Car Model : @car.Model</li>
     <li>Car Dscription : @Html.Raw(car.HtmlDescription)</li>
-    <li>Car Usage Duration : @($"{(DateTime.Now-car.FirstUseDate).Days/356} Years")</li>
+    <li>Car Usage Duration : @($"{(DateTime.Now-car.FirstUseDate).Days/365} Years")</li>
 </ul>
 
 <a href="/cars/allcars">back to all cars</a>
