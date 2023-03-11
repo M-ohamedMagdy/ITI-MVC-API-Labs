@@ -1,0 +1,55 @@
+﻿@model List<Car>;
+@{var cars = Model;}
+
+
+<h1 class="text-danger">Table</h1>
+
+<table>
+    <thead>
+        <tr class="text-center border-bottom-1">
+            <th>Image</th>
+            <th>Name</th>
+            <th>Usage Duration</th>
+            <th>Description</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var car in cars)
+        {
+            var name = $"{car.Model} From {car.Manufacturer}";
+            var duration = DateTime.Now - car.FirstUseDate;
+            <tr>
+                <td class="p-3">
+                    <figure class="figure">
+                        <img src="@(car.Image)" class="figure-img img-fluid rounded" alt="@(name)">
+                        <figcaption class="figure-caption">@(name)</figcaption>
+                    </figure>
+                </td>
+                <td class="p-3">@(name)</td>
+                <td class="p-3">@($"{duration.Days / 365} Years")</td>
+                <td class="p-3">@Html.Raw(car.HtmlDescription)</td>
+                <td class="p-3"><a href="/cars/details?model=@(car.Model)&source=Table"><button class="btn btn-primary">Show Details</button></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br/><br/><br/> <hr/> <br/><br/><br/>
+
+<h1 class="text-danger">List</h1>
+
+<ul>
+    @foreach (var car in cars)
+    {
+        var name = $"{car.Model} From {car.Manufacturer}";
+        <li>
+            <figure class="figure pe-4">
+                <img src="@(car.Image)" class="figure-img img-fluid rounded" alt="@(name)">
+                <figcaption class="figure-caption">@(name)</figcaption>
+            </figure>
+            @(name)
+            <a class="ps-4" href="/cars/details?model=@(car.Model)&source=List"><button class="btn btn-warning">Show Details</button></a>
+        </li>
+    }
+</ul>
