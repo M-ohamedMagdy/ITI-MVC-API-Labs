@@ -1,12 +1,12 @@
 ﻿namespace lab1.Models
 {
-    public enum source
+    public enum Status
     {
         Table, List
     }
     public class Source
     {
-        public source source;
-        public Car car;
+        public Status source;
+        public Car? car;
     }
 }

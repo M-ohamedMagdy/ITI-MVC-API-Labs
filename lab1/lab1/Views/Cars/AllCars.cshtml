@@ -1,6 +1,30 @@
 ﻿@model List<Car>;
 @{var cars = Model;}
 
+@{
+    string? name = null;
+    
+    void carImage(Car car)
+    {
+        name = $"{car.Model} From {car.Manufacturer}";
+        <figure class="figure">
+            <img src="@(car.Image)" class="figure-img img-fluid rounded" alt="@(name)">
+            <figcaption class="figure-caption">@(name)</figcaption>
+        </figure>
+    }
+    
+    void carName(Car car)
+    {
+        <span>@(name)</span>
+    }
+
+    void carDuration(Car car)
+    {
+        <span>@($"{DateTime.Now.Year - car.FirstUseDate.Year} Years")</span>
+    }
+
+
+}
 
 <h1 class="text-danger">Table</h1>
 
@@ -17,17 +41,10 @@
     <tbody>
         @foreach(var car in cars)
         {
-            var name = $"{car.Model} From {car.Manufacturer}";
-            var duration = DateTime.Now - car.FirstUseDate;
             <tr>
-                <td class="p-3">
-                    <figure class="figure">
-                        <img src="@(car.Image)" class="figure-img img-fluid rounded" alt="@(name)">
-                        <figcaption class="figure-caption">@(name)</figcaption>
-                    </figure>
-                </td>
-                <td class="p-3">@(name)</td>
-                <td class="p-3">@($"{duration.Days / 365} Years")</td>
+                <td class="p-3">@{ carImage(car); }</td>
+                <td class="p-3">@{ carName(car); }</td>
+                <td class="p-3">@{ carDuration(car); }</td>
                 <td class="p-3">@Html.Raw(car.HtmlDescription)</td>
                 <td class="p-3"><a href="/cars/details?model=@(car.Model)&source=Table"><button class="btn btn-primary">Show Details</button></a></td>
             </tr>
@@ -42,13 +59,10 @@
 <ul>
     @foreach (var car in cars)
     {
-        var name = $"{car.Model} From {car.Manufacturer}";
         <li>
-            <figure class="figure pe-4">
-                <img src="@(car.Image)" class="figure-img img-fluid rounded" alt="@(name)">
-                <figcaption class="figure-caption">@(name)</figcaption>
-            </figure>
-            @(name)
+            @{ carImage(car); }
+            @{ carName(car); }
+            @{ carDuration(car); }
             <a class="ps-4" href="/cars/details?model=@(car.Model)&source=List"><button class="btn btn-warning">Show Details</button></a>
         </li>
     }

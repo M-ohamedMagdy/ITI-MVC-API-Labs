@@ -10,7 +10,7 @@ namespace lab1.Controllers
             var cars = Car.GetCars();
             return View(cars);
         }
-        public IActionResult Details(string model,source source) 
+        public IActionResult Details(string model, Status source) 
         {
             var car = Car.GetCars().First(a=>a.Model == model);
             Source carDetails = new() { car = car, source = source }; 
