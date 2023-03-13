@@ -1,0 +1,29 @@
+﻿@model TicketVM;
+
+<div class="card" style="width: 50vw;">
+    <div class="card-body">
+        <form asp-action="AddTicket" method="post">
+            <div class="form-group">
+                <label asp-for="CreatedDate"></label>
+                <input class="form-control" asp-for="CreatedDate" />
+            </div>
+    
+            <div class="form-group">
+                <input asp-for="IsClosed" />
+                <label asp-for="IsClosed"></label>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Severity"></label>
+                <select asp-for="Severity" asp-items="Html.GetEnumSelectList<Severity>()"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <input class="form-control" asp-for="Description" />
+            </div>
+
+            <button class="btn btn-success"> Submit </button>
+        </form>
+    </div>
+</div>

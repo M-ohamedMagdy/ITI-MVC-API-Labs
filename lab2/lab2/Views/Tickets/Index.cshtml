@@ -1,0 +1,24 @@
+﻿
+@model List<Ticket>
+@{ var TicketsList = Model; }
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@foreach (var Ticket in TicketsList)
+{
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+            <h4>@(Ticket.CreatedDate)</h4>
+            <h4>@(Ticket.IsClosed)</h4>
+            <h4>@(Ticket.Severity)</h4>
+            <h4>@(Ticket.Description)</h4>
+      </div>
+    </div> 
+}

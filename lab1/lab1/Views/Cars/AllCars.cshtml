@@ -6,10 +6,9 @@
     
     void carImage(Car car)
     {
-        name = $"{car.Model} From {car.Manufacturer}";
         <figure class="figure">
-            <img src="@(car.Image)" class="figure-img img-fluid rounded" alt="@(name)">
-            <figcaption class="figure-caption">@(name)</figcaption>
+            <img src="@(car.Image)" class="figure-img img-fluid rounded" alt="@(car.Name)">
+            <figcaption class="figure-caption">@(car.Name)</figcaption>
         </figure>
     }
     
@@ -22,8 +21,6 @@
     {
         <span>@($"{DateTime.Now.Year - car.FirstUseDate.Year} Years")</span>
     }
-
-
 }
 
 <h1 class="text-danger">Table</h1>
@@ -46,7 +43,7 @@
                 <td class="p-3">@{ carName(car); }</td>
                 <td class="p-3">@{ carDuration(car); }</td>
                 <td class="p-3">@Html.Raw(car.HtmlDescription)</td>
-                <td class="p-3"><a href="/cars/details?model=@(car.Model)&source=Table"><button class="btn btn-primary">Show Details</button></a></td>
+                <td class="p-3"><a href="/cars/details?model=@(car.Model)&source=@Status.Table"><button class="btn btn-primary">Show Details</button></a></td>
             </tr>
         }
     </tbody>
@@ -63,7 +60,7 @@
             @{ carImage(car); }
             @{ carName(car); }
             @{ carDuration(car); }
-            <a class="ps-4" href="/cars/details?model=@(car.Model)&source=List"><button class="btn btn-warning">Show Details</button></a>
+            <a class="ps-4" href="/cars/details?model=@(car.Model)&source=@Status.List"><button class="btn btn-warning">Show Details</button></a>
         </li>
     }
 </ul>
