@@ -1,15 +1,12 @@
-﻿using lab2.Models.Domain;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace lab2.Models.View
 {
-    public enum Severity
+    public class EditTicketVM
     {
-        high, medium, low
-    }
-    public record TicketVM
-    {
-        public DateTime CreatedDate { get; init; } = DateTime.Now;
+        public Guid Id { get; set; }
+        public DateTime CreatedDate { get; init; }
 
         [Display(Name = "Is Closed?")]
         public bool IsClosed { get; init; }

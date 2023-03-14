@@ -13,12 +13,28 @@
 
 @foreach (var Ticket in TicketsList)
 {
-    <div class="card" style="width: 18rem;">
+    <div class="card p-2 m-5 d-inline-block" style="width: 18rem;">
       <div class="card-body">
-            <h4>@(Ticket.CreatedDate)</h4>
-            <h4>@(Ticket.IsClosed)</h4>
-            <h4>@(Ticket.Severity)</h4>
-            <h4>@(Ticket.Description)</h4>
+            <h4>Description : @(Ticket.Description)</h4>
+            <h5 class="text-success">Created Date : @(Ticket.CreatedDate)</h5>
+            <h5 class="text-info">Is Closed : @(Ticket.IsClosed)</h5>
+            <h5 class="text-danger">Severity : @(Ticket.severity)</h5>
+            <h5 class="text-primary">Department : @(Ticket.Department.Name)</h5>
+            <h4 class="text-secondary">Developers : </h4>
+            <ul>
+            @foreach (var Developer in Ticket.Developers)
+            {
+                <li>@(Developer.FullName())</li>
+            }
+            </ul>
+            <div class="my-2"><a href="/Tickets/EditTicketForm/@(Ticket.Id)"><button class="btn btn-warning w-100">Edit</button></a></div>
+            <div><a href="/Tickets/DeleteTicket/@(Ticket.Id)"><button class="btn btn-danger w-100" onclick="fire(@(Ticket.Id))">Delete</button></a></div>
       </div>
     </div> 
+}
+
+@section Scripts{
+    <script>
+        
+    </script>
 }
