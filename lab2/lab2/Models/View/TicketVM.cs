@@ -13,6 +13,7 @@ namespace lab2.Models.View
 
         [Display(Name = "Is Closed?")]
         public bool IsClosed { get; init; }
+        [Display(Name = "Severity")]
         public Severity severity { get; init; }
         public string? Description { get; init; }
         public Guid Department { get; set; }

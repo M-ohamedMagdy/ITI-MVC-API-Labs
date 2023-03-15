@@ -1,0 +1,26 @@
+﻿@model IEnumerable<EditTicketsVM>
+@{
+    var TicketsList = Model;
+}
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@foreach (var Ticket in TicketsList)
+{
+    <div class="card p-2 m-5 d-inline-block" style="width: 18rem;">
+        <div class="card-body">
+            <h4>Title : @(Ticket.Title)</h4>
+            <h5 class="text-danger">Severity : @(Ticket.Severity)</h5>
+            <h5 class="text-success">Description : @(Ticket.Description)</h5>
+
+            <div class="my-2"><a href="/Tickets/Details/@(Ticket.Id)"><button class="btn btn-warning w-100">Details</button></a></div>
+        </div>
+    </div>
+}
