@@ -42,7 +42,7 @@ public class TicketsManager : ITicketsManager
     }
     public EditTicketsVM? GetTicketForEdit(Guid id)
     {
-        Ticket? x = TicketsRepo.GetTicketForEdit(id);
+        Ticket? x = TicketsRepo.GetTicketDeptDevById(id);
         if (x == null) return null;
         return new EditTicketsVM(x.Id, x.Title, x.Description, x.Severity, x.Department?.Id, x.Developers.Select(d => d.Id).ToHashSet());
     }
