@@ -1,14 +1,15 @@
-﻿@model EditTicketsVM;
+﻿@model ReadTicketsVM;
 @{
     var Ticket = Model;
 }
 <div class="card p-2 m-5 d-inline-block" style="width: 50vw; min-width:50px; margin:auto;">
-        <div class="card-body">
-            <h4>Title : @(Ticket.Title)</h4>
-            <h5 class="text-danger">Severity : @(Ticket.Severity)</h5>
-            <h5 class="text-success">Description : @(Ticket.Description)</h5>
-
+        <ul class="card-body">
+            <li>Title : @(Ticket.Title)</li>
+            <li class="text-danger">Severity : @(Ticket.Severity)</li>
+            <li class="text-success">Description : @(Ticket.Description)</li>
+            <li class="text-success">Department : @(Ticket.Department)</li>
+            <li class="text-success">Number of Developers : @(Ticket.Developers)</li>
+        </ul>
             <div class="my-2"><a href="/Tickets/Edit/@(Ticket.Id)"><button class="btn btn-warning w-100">Edit</button></a></div>
             <div><a href="/Tickets/Delete/@(Ticket.Id)"><button class="btn btn-danger w-100" onclick="fire(@(Ticket.Id))">Delete</button></a></div>
-        </div>
     </div>

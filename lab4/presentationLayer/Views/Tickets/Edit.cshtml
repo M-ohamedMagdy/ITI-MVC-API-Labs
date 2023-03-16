@@ -6,22 +6,32 @@
 
             <div class="form-group">
                 <label asp-for="Id"></label>
-                <input type="hidden" class="form-control" asp-for="Id" />
+                <input type="hidden" class="form-control" asp-for="@Model.Id" />
             </div>
 
             <div class="form-group">
                 <label asp-for="Title"></label>
-                <input class="form-control" asp-for="Title" />
+                <input class="form-control" asp-for="@Model.Title" />
             </div>
 
             <div class="form-group">
                 <label asp-for="Severity"></label>
-                <select asp-for="Severity" asp-items="Html.GetEnumSelectList<Severity>()"></select>
+                <select asp-for="@Model.Severity" asp-items="Html.GetEnumSelectList<Severity>()"></select>
             </div>
 
             <div class="form-group">
                 <label asp-for="Description"></label>
-                <input class="form-control" asp-for="Description" />
+                <input class="form-control" asp-for="@Model.Description" />
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Department"></label>
+                <select class="form-control" asp-for="@Model.Department" asp-items="ViewBag.Departments"></select>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="@Model.Developers"></label>
+                <select class="form-control" asp-for="@Model.Developers" asp-items="ViewBag.Developers"></select>
             </div>
 
             <button class="btn btn-success"> Apply </button>

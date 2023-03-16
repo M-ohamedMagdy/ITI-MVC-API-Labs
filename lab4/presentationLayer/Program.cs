@@ -1,7 +1,11 @@
 using BusinessLayer;
+using BusinessLayer.Managers.DepartmentsManager;
+using BusinessLayer.Managers.DevelopersManager;
 using DataAccessLayer.Context;
 using DataAccessLayer.DomainModels;
 using DataAccessLayer.Repositories;
+using DataAccessLayer.Repositories.DepartmentsRepo;
+using DataAccessLayer.Repositories.DevelopersRepo;
 using Microsoft.EntityFrameworkCore;
 
 namespace presentationLayer
@@ -16,12 +20,18 @@ namespace presentationLayer
             builder.Services.AddControllersWithViews();
 
             ///////////////////////////
-            var connectionString = builder.Configuration.GetConnectionString("tickets");
+            
+            var connectionString = builder.Configuration.GetConnectionString("tickets2");
             builder.Services.AddDbContext<myContext>(options
                 => options.UseSqlServer(connectionString));
 
             builder.Services.AddScoped<ITicketsRepo, TicketsRepo>();
+            builder.Services.AddScoped<IDeptRepo, DeptRepo>();
+            builder.Services.AddScoped<IDevRepo, DevRepo>();
             builder.Services.AddScoped<ITicketsManager, TicketsManager>();
+            builder.Services.AddScoped<IDeptManager, DeptManager>();
+            builder.Services.AddScoped<IDevManager, DevManager>();
+
             ///////////////////////////
 
             var app = builder.Build();

@@ -7,4 +7,4 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.ViewModels;
 
-public record AddTicketsVM (string Title, string Description, Severity Severity);
+public record AddTicketsVM (string Title = "", string Description = "", Severity Severity = Severity.High, Guid? Department = null, HashSet<Guid> Developers = null!);

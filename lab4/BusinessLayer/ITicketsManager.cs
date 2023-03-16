@@ -1,13 +1,15 @@
 ﻿using BusinessLayer.ViewModels;
 using DataAccessLayer.DomainModels;
+using System.Net.Sockets;
 
 namespace BusinessLayer;
 
 public interface ITicketsManager
 {
-    IEnumerable<EditTicketsVM> GetAll();
-    EditTicketsVM? GetById(Guid id);
-    void Add(AddTicketsVM ticket);
-    void Update(EditTicketsVM ticket);
+    IEnumerable<ReadTicketsVM> GetTicketsDeptDev();
+    ReadTicketsVM GetTicketDeptDevById(Guid id);
     void Delete(Guid id);
+    EditTicketsVM? GetTicketForEdit(Guid id);
+    void UpdateTicket(EditTicketsVM ticket);
+    void AddNewTicket(AddTicketsVM ticket);
 }

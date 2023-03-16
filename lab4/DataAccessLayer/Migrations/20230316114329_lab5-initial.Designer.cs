@@ -4,6 +4,7 @@ using DataAccessLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(myContext))]
-    partial class myContextModelSnapshot : ModelSnapshot
+    [Migration("20230316114329_lab5-initial")]
+    partial class lab5initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,22 +42,22 @@ namespace DataAccessLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("dbc75f3d-98d7-49ad-abe2-9d064426854c"),
+                            Id = new Guid("6d2abe1c-c0bc-43e5-a79b-c7467753c640"),
                             Name = "Electrical"
                         },
                         new
                         {
-                            Id = new Guid("711e3ab5-c12c-4ac9-96ff-8abb9c58daa4"),
+                            Id = new Guid("0924ac40-8cbe-46f6-bd0b-688bfc0e44c0"),
                             Name = "Mechanical"
                         },
                         new
                         {
-                            Id = new Guid("29c13290-5f3d-4fa3-bae3-356f00f9bb6a"),
+                            Id = new Guid("40743094-348f-401e-ab04-00c3bd56afb4"),
                             Name = "Civil"
                         },
                         new
                         {
-                            Id = new Guid("432aa782-90a0-4598-9d8c-cca574f4fa51"),
+                            Id = new Guid("80701952-7ca2-4068-8070-2b543434b446"),
                             Name = "Petroleum"
                         });
                 });
@@ -80,31 +83,31 @@ namespace DataAccessLayer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a82ab199-e6d1-4b3a-8ae4-9324a204a719"),
+                            Id = new Guid("86dd294e-11b0-42fd-8644-77b4e83b47e3"),
                             FirstName = "Jamal",
                             LastName = "Ali"
                         },
                         new
                         {
-                            Id = new Guid("9e77a4a9-c1b7-4c74-8aac-eeecacaeaa48"),
+                            Id = new Guid("6467f76c-fc8c-4e82-9c8f-c6316b920c26"),
                             FirstName = "Mohamed",
                             LastName = "Magdy"
                         },
                         new
                         {
-                            Id = new Guid("5594410a-9672-4634-8bc1-133cda07fc11"),
+                            Id = new Guid("7d9ccc13-064d-482a-8faf-c0a9a8d8e59b"),
                             FirstName = "Mina",
                             LastName = "Gerges"
                         },
                         new
                         {
-                            Id = new Guid("49f562e4-02de-44bd-9155-c7c153bdeb76"),
+                            Id = new Guid("b5e8ac12-0c2d-4bad-a3ef-16e433357c59"),
                             FirstName = "Mahmoud",
                             LastName = "Hesham"
                         },
                         new
                         {
-                            Id = new Guid("11540754-253f-4c0f-9315-5c1d00c1b2a8"),
+                            Id = new Guid("c0113a8a-e058-425b-9e30-40f7dcd3c9fd"),
                             FirstName = "Ahmed",
                             LastName = "Khairy"
                         });
@@ -114,6 +117,9 @@ namespace DataAccessLayer.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("DeptId")
@@ -132,35 +138,35 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeptId");
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("tickets");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("18648f0b-b9b4-4d66-af4d-a710dd61c67a"),
+                            Id = new Guid("5cb4d103-bd27-4b67-b02f-f26560aa905b"),
                             Description = "ticket number one",
                             Severity = 2,
                             Title = "first"
                         },
                         new
                         {
-                            Id = new Guid("bc5c1b56-a9f7-4668-9cd1-ff4f9515a7a3"),
+                            Id = new Guid("8a549678-c889-4520-a582-bff12f66c4f5"),
                             Description = "ticket number two",
                             Severity = 1,
                             Title = "second"
                         },
                         new
                         {
-                            Id = new Guid("566c7130-bcd2-4ef4-9166-e7e3d11b600f"),
+                            Id = new Guid("9fdbaa65-e6d3-4a16-82b6-bfb9559452db"),
                             Description = "ticket number three",
                             Severity = 0,
                             Title = "third"
                         },
                         new
                         {
-                            Id = new Guid("04f9e64c-62e8-4c01-9390-37cbb29345a4"),
+                            Id = new Guid("f835eff3-3aa9-4e17-85cf-45070902c258"),
                             Description = "ticket number four",
                             Severity = 2,
                             Title = "fourth"
@@ -186,7 +192,7 @@ namespace DataAccessLayer.Migrations
                 {
                     b.HasOne("DataAccessLayer.DomainModels.Department", "Department")
                         .WithMany("Tickets")
-                        .HasForeignKey("DeptId");
+                        .HasForeignKey("DepartmentId");
 
                     b.Navigation("Department");
                 });

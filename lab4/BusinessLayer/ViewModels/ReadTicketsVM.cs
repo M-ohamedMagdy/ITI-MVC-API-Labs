@@ -7,5 +7,4 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.ViewModels;
 
-public record EditTicketsVM (Guid Id, string Title = "", string Description = "", Severity Severity = Severity.High, Guid? Department = null, HashSet<Guid> Developers = null!);
-
+public record ReadTicketsVM(Guid Id, string Title, string Description, string Severity, string? Department, int Developers);
