@@ -24,11 +24,11 @@ public class TicketsManager : ITicketsManager
         DeptRepo = deptRepo;
         DevRepo = devRepo;
     }
-    
-    public IEnumerable<ReadTicketsVM> GetTicketsDeptDev() 
-    { 
+
+    public IEnumerable<ReadTicketsVM> GetTicketsDeptDev()
+    {
         var Tickets = TicketsRepo.GetTicketsDeptDev();
-        return Tickets.Select(t => new ReadTicketsVM(t.Id, t.Title, t.Description, t.Severity.ToString(), t.Department?.Name, t.Developers.Count));    
+        return Tickets.Select(t => new ReadTicketsVM(t.Id, t.Title, t.Description, t.Severity.ToString(), t.Department?.Name, t.Developers.Count));
     }
     public ReadTicketsVM GetTicketDeptDevById(Guid id)
     {
@@ -56,9 +56,15 @@ public class TicketsManager : ITicketsManager
         TicketToUpdate.Severity = ticket.Severity;
         TicketToUpdate.DeptId = ticket.Department;
 
-        if(ticket.Developers == null) { TicketToUpdate.Developers = new HashSet<Developer>(); }
-        else { TicketToUpdate.Developers = DevRepo.getAllDevelopers().Where(d => ticket.Developers.Contains(d.Id)).ToHashSet(); }
-        
+        if (ticket.Developers == null)
+        {
+            TicketToUpdate.Developers = new HashSet<Developer>();
+        }
+        else
+        {
+            TicketToUpdate.Developers = DevRepo.getAllDevelopers().Where(d => ticket.Developers.Contains(d.Id)).ToHashSet();
+        }
+
         TicketsRepo.SaveChanges();
     }
     public void AddNewTicket(AddTicketsVM ticket)
@@ -68,7 +74,7 @@ public class TicketsManager : ITicketsManager
         TicketsRepo.AddNewTicket(TicketToAdd);
         TicketsRepo.SaveChanges();
     }
-    
-    
+
+
 }
 

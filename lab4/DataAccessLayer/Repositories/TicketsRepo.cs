@@ -28,7 +28,7 @@ public class TicketsRepo : ITicketsRepo
     }
     public Ticket GetTicketDeptDevById(Guid id)
     {
-        return context.Set<Ticket>().Include(t => t.Department).Include(t => t.Developers).First(t => t.Id==id);
+        return context.Set<Ticket>().Include(t => t.Department).Include(t => t.Developers).First(t => t.Id == id);
     }
     public void Delete(Guid id)
     {
@@ -36,7 +36,7 @@ public class TicketsRepo : ITicketsRepo
         if (ticket != null) { context.Set<Ticket>().Remove(ticket); }
     }
     public Ticket? GetTicketForEdit(Guid id)
-    { 
+    {
         return context.Set<Ticket>().Find(id);
     }
     // USELESS
@@ -51,7 +51,9 @@ public class TicketsRepo : ITicketsRepo
     }
     public Ticket? GetById(Guid id)
     {
-        return context.Set<Ticket>().Find(id);
+        return context.Set<Ticket>()
+            .Include(t => t.Developers)
+            .First(t => t.Id == id);
     }
     public int SaveChanges()
     {

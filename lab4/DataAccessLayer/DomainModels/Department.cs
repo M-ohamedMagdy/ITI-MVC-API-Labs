@@ -10,7 +10,7 @@ namespace DataAccessLayer.DomainModels
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public ICollection<Ticket> Tickets => new HashSet<Ticket>();
+        public ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
         public string DeptInfo() => $"{Name} ({Id})";
         public Department()
         {
@@ -18,8 +18,8 @@ namespace DataAccessLayer.DomainModels
         }
         public Department(string name)
         {
-            Id= Guid.NewGuid();
-            Name= name;
+            Id = Guid.NewGuid();
+            Name = name;
         }
     }
 }
