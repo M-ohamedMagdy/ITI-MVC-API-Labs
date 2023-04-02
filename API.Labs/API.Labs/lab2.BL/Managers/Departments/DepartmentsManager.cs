@@ -18,4 +18,16 @@ public class DepartmentsManager : IDepartmentsManager
     {
         return DeptRepo.GetAll();
     }
+
+    public DepartmentReadVM? GetDepartment(int id)
+    {
+        var dept = DeptRepo.GetDepartment(id);
+        
+        if (dept == null) return null;
+        
+        IEnumerable<TicketInDepartmentVM> tickets = dept.Tickets
+            .Select(t => new TicketInDepartmentVM(t.Id, t.Description, t.Developers.Count));
+
+        return new DepartmentReadVM(id, dept.Name, tickets);
+    }
 }

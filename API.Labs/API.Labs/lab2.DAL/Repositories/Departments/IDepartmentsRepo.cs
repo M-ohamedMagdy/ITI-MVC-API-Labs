@@ -8,5 +8,5 @@ namespace lab2.DAL;
 
 public interface IDepartmentsRepo : IGenericRepo<Department>
 {
-
+    Department? GetDepartment(int id);
 }

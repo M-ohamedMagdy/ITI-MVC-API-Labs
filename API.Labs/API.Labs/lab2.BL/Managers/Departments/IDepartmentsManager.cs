@@ -10,4 +10,5 @@ namespace lab2.BL;
 public interface IDepartmentsManager
 {
     IQueryable<Department> GetAllDepartments();
+    DepartmentReadVM? GetDepartment(int id);
 }

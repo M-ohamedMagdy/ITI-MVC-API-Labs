@@ -50,7 +50,7 @@ public class TicketsManager : ITicketsManager
         return ticketsRepo.GetTicketsDetails().Select(t => new TicketDetailsVM(
             t.Description,
             t.Severity.ToString() ?? "",
-            t.Department.Name ?? "",
+            t.Department.Name,
             t.Developers.Count
             ));
     }
