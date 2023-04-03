@@ -6,4 +6,4 @@ using System.Threading.Tasks;
 
 namespace lab3.BL;
 
-public record PersonReadVM(string UserName, string Email, int DependentsCount);
+public record PersonReadVM(string UserName, string Email, string Role, int DependentsCount);

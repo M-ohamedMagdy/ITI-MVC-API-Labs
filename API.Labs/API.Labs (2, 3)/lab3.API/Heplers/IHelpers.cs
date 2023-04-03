@@ -5,6 +5,5 @@ namespace lab3.API;
 
 public interface IHelpers
 {
-    SecurityKey GetSecurityKey();
     string GenerateToken(IList<Claim> claims);
 }

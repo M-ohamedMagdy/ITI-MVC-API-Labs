@@ -9,20 +9,14 @@ namespace lab3.API.Heplers;
 public class Helpers : IHelpers
 {
     private readonly IConfiguration _configuration;
+
     public Helpers(IConfiguration configuration)
     {
         _configuration = configuration;
     }
-    public SecurityKey GetSecurityKey()
-    {
-        var secretKeyString = _configuration.GetValue<string>("SecretKey") ?? "";
-        var secretKeyInBytes = Encoding.ASCII.GetBytes(secretKeyString);
-        var securityKey = new SymmetricSecurityKey(secretKeyInBytes);
-        return securityKey;
-    }
     public string GenerateToken(IList<Claim> claims)
     {
-        SecurityKey securityKey = GetSecurityKey();
+        SecurityKey securityKey = _configuration.GetSecurityKeyExt();
         var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
 
         DateTime tokenExpiryDate = DateTime.Now.AddMinutes(15);

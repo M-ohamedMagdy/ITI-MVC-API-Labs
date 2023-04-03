@@ -53,9 +53,7 @@ namespace lab3.API
 
             #region Authentication
 
-            var secretKeyString = builder.Configuration.GetValue<string>("SecretKey") ?? "";
-            var secretKeyInBytes = Encoding.ASCII.GetBytes(secretKeyString);
-            var securityKey = new SymmetricSecurityKey(secretKeyInBytes);
+            var securityKey = builder.Configuration.GetSecurityKeyExt();
 
             builder.Services.AddAuthentication(options =>
             {
@@ -79,7 +77,7 @@ namespace lab3.API
 
             builder.Services.AddAuthorization(options =>
             {
-                options.AddPolicy("AllowAdminsOnly", 
+                options.AddPolicy("AllowAdminsOnly",
                     builder => builder.RequireClaim(ClaimTypes.Role, "Admin"));
                 options.AddPolicy("AllowUsers&Admins",
                     builder => builder.RequireClaim(ClaimTypes.Role, "User", "Admin"));

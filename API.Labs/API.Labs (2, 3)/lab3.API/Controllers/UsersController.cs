@@ -61,6 +61,13 @@ public class UsersController : ControllerBase
             new Claim(ClaimTypes.NameIdentifier, person.Id),
             new Claim(ClaimTypes.Role, "Admin")
         };
+
+        var addingClaimsResult = await _userManager.AddClaimsAsync(person, claims);
+        if (!addingClaimsResult.Succeeded)
+        {
+            return BadRequest(addingClaimsResult.Errors);
+        }
+
         return CreatedAtAction(actionName:nameof(GetCurrentUserInfo),
                                value: new {Message="Admin Registered Successfully"});
     }
@@ -81,6 +88,13 @@ public class UsersController : ControllerBase
             new Claim(ClaimTypes.NameIdentifier, person.Id),
             new Claim(ClaimTypes.Role, "User")
         };
+
+        var addingClaimsResult = await _userManager.AddClaimsAsync(person, claims);
+        if (!addingClaimsResult.Succeeded) 
+        {
+            return BadRequest(addingClaimsResult.Errors);
+        }
+
         return CreatedAtAction(actionName: nameof(GetCurrentUserInfo),
                                value: new { Message = "User Registered Successfully" });
     }
@@ -95,12 +109,14 @@ public class UsersController : ControllerBase
             return NotFound();
         }
 
-        return new PersonReadVM(currentUser.UserName ?? "", currentUser.Email ?? "", currentUser.Dependants);
+        var role = User.Claims.First(c => c.Type == ClaimTypes.Role).Value;
+
+        return new PersonReadVM(currentUser.UserName ?? "", currentUser.Email ?? "", role, currentUser.Dependants);
     }
     [HttpGet]
     [Route("user-info/{id}")]
     [Authorize(Policy = "AllowUsers&Admins")]
-    public async Task<ActionResult<PersonReadVM>> GetUserInfo(int id) 
+    public async Task<ActionResult<PersonReadVM>> GetUserInfo(string id)
     {
         Person? user = await _userManager.FindByIdAsync(id.ToString());
         if (user is null)
@@ -108,12 +124,14 @@ public class UsersController : ControllerBase
             return NotFound();
         }
 
-        return new PersonReadVM (user.UserName ?? "", user.Email ?? "", user.Dependants);
+        var role = User.Claims.First(c => c.Type == ClaimTypes.Role).Value;
+
+        return new PersonReadVM (user.UserName ?? "", user.Email ?? "", role, user.Dependants);
     }
     [HttpGet]
     [Route("manager-info/{id}")]
     [Authorize(Policy = "AllowAdminsOnly")]
-    public async Task<ActionResult<PersonReadVM>> GetManagerInfo(int id)
+    public async Task<ActionResult<PersonReadVM>> GetManagerInfo(string id)
     {
         Person? manager = await _userManager.FindByIdAsync(id.ToString());
         if (manager is null)
@@ -121,6 +139,8 @@ public class UsersController : ControllerBase
             return NotFound();
         }
 
-        return new PersonReadVM(manager.UserName ?? "", manager.Email ?? "", manager.Dependants);
+        var role = User.Claims.First(c => c.Type == ClaimTypes.Role).Value;
+
+        return new PersonReadVM(manager.UserName ?? "", manager.Email ?? "", role, manager.Dependants);
     }
 }
